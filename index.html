@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة النقل والخدمات اللوجستية</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Apply the Cairo font as the default */
+        body {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Custom background pattern for the video section */
+        .pattern-background {
+            background-color: #0a1a2f;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* Card hover effect */
+        .gallery-card:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-card .overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-card:hover .overlay {
+            opacity: 1;
+        }
+
+        /* --- Hero Carousel Styles --- */
+        .hero-carousel {
+            position: relative;
+            width: 100%;
+            height: 70vh; /* Adjust height as needed */
+            overflow: hidden;
+        }
+        .hero-slider {
+            display: flex;
+            height: 100%;
+            transition: transform 0.7s ease-in-out;
+        }
+        .hero-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            box-sizing: border-box;
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        .hero-carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .hero-carousel-button.prev {
+            left: 1.5rem;
+        }
+        .hero-carousel-button.next {
+            right: 1.5rem;
+        }
+        .hero-carousel-pagination {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.75rem;
+            z-index: 10;
+        }
+        .hero-pagination-dot {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .hero-pagination-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- 🔝 Top Bar -->
+    <header id="main-header" class="bg-transparent text-white fixed top-0 left-0 right-0 z-50 transition-colors duration-300">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold">
+                شعار الشركة
+            </a>
+            <!-- Navigation Menu -->
+            <nav class="hidden md:flex items-center space-x-8 space-x-reverse">
+                <a href="#about" class="hover:text-[#e0f7fa] transition-colors">من نحن</a>
+                <a href="#services" class="hover:text-[#e0f7fa] transition-colors">خدماتنا</a>
+                <a href="#gallery" class="hover:text-[#e0f7fa] transition-colors">معرض الصور</a>
+                <a href="#contact" class="hover:text-[#e0f7fa] transition-colors">اتصل بنا</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden" id="mobile-menu-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-[#0a1a2f]">
+            <a href="#about" class="block py-2 hover:text-[#e0f7fa]">من نحن</a>
+            <a href="#services" class="block py-2 hover:text-[#e0f7fa]">خدماتنا</a>
+            <a href="#gallery" class="block py-2 hover:text-[#e0f7fa]">معرض الصور</a>
+            <a href="#contact" class="block py-2 hover:text-[#e0f7fa]">اتصل بنا</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 🚚 Hero Carousel Section -->
+        <section id="hero-carousel" class="hero-carousel">
+            <div class="hero-slider">
+                <!-- Slide 1 -->
+                <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/158898707_3399457056824771_4472752526008109004_o.jpg');">
+                    <div class="absolute inset-0 bg-black/50"></div>
+                    <div class="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
+                        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">نقل آمن، سريع، وموثوق</h1>
+                        <p class="text-lg md:text-xl mb-8 max-w-2xl">نقدم حلول نقل متكاملة تلبي جميع احتياجاتكم بكفاءة واحترافية.</p>
+                        <a href="#contact" class="bg-[#0097a7] hover:bg-[#007f8a] text-white font-bold py-3 px-8 transition-colors">اطلب عرض سعر الآن</a>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="hero-slide" style="background-image: url('images/carousel-3.jpg');">
+                    <div class="absolute inset-0 bg-black/50"></div>
+                     <div class="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
+                        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">تغليف احترافي لكل قطعة</h1>
+                        <p class="text-lg md:text-xl mb-8 max-w-2xl">نضمن سلامة ممتلكاتك باستخدام أفضل مواد التغليف.</p>
+                        <a href="#services" class="bg-[#f59e0b] hover:bg-orange-500 text-white font-bold py-3 px-8 transition-colors">اكتشف خدماتنا</a>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/96082384_676635066214761_4640366723403350016_n.jpg');">
+                    <div class="absolute inset-0 bg-black/50"></div>
+                    <div class="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
+                        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">أسطول شاحنات حديث</h1>
+                        <p class="text-lg md:text-xl mb-8 max-w-2xl">شاحنات مجهزة لجميع أنواع النقل، لضمان وصولها بأمان.</p>
+                        <a href="#gallery" class="bg-[#0097a7] hover:bg-[#007f8a] text-white font-bold py-3 px-8 transition-colors">شاهد أعمالنا</a>
+                    </div>
+                </div>
+                 <!-- Slide 4 -->
+                <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/18813256_1792032541106815_512617771018849509_n.jpg');">
+                    <div class="absolute inset-0 bg-black/50"></div>
+                    <div class="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
+                        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">خبرة تمتد لسنوات</h1>
+                        <p class="text-lg md:text-xl mb-8 max-w-2xl">فريقنا المحترف جاهز لخدمتكم في أي وقت.</p>
+                        <a href="#about" class="bg-[#f59e0b] hover:bg-orange-500 text-white font-bold py-3 px-8 transition-colors">اعرف المزيد عنا</a>
+                    </div>
+                </div>
+            </div>
+            
+            <button aria-label="الشريحة السابقة" class="hero-carousel-button prev">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" transform="rotate(180 12 12)" /></svg>
+            </button>
+            <button aria-label="الشريحة التالية" class="hero-carousel-button next">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            
+            <div class="hero-carousel-pagination"></div>
+        </section>
+
+        <!-- 🧩 Features Section -->
+        <section class="py-16">
+            <div class="container mx-auto px-6 grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-[#0097a7] text-white p-8 flex items-start space-x-4 space-x-reverse rounded-lg shadow-md">
+                    <div class="bg-white/20 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2">تغليف آمن</h3>
+                        <p class="text-[#e0f7fa]">نستخدم أفضل مواد التغليف لحماية ممتلكاتكم من أي ضرر أثناء النقل.</p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-[#0a1a2f] text-white p-8 flex items-start space-x-4 space-x-reverse rounded-lg shadow-md">
+                    <div class="bg-white/20 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M20 18.5a2.5 2.5 0 0 0-5 0"></path><path d="M15 18.5a2.5 2.5 0 0 1 5 0"></path><path d="M12 12H2"></path><path d="M2 8h4"></path><path d="M12 8h2"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2">أسطول حديث</h3>
+                        <p class="text-gray-300">شاحنات مجهزة ومراقبة لضمان وصول شحناتكم في الوقت المحدد وبأمان تام.</p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-[#0097a7] text-white p-8 flex items-start space-x-4 space-x-reverse rounded-lg shadow-md">
+                    <div class="bg-white/20 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2">فريق محترف</h3>
+                        <p class="text-[#e0f7fa]">عمالة مدربة على أعلى مستوى للتعامل مع جميع أنواع الأثاث والمعدات.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 📖 About Section -->
+        <section id="about" class="py-16 bg-[#e0f7fa]">
+            <div class="container mx-auto px-6">
+                <div class="bg-white shadow-lg overflow-hidden grid md:grid-cols-2 items-center rounded-lg">
+                    <div class="p-8 md:p-12">
+                        <h2 class="text-3xl font-black text-black mb-4">خبرتنا في خدمتكم</h2>
+                        <p class="text-[#777777] mb-6 leading-relaxed">
+                            نحن شركة رائدة في مجال النقل والخدمات اللوجستية، نجمع بين الخبرة الطويلة والتكنولوجيا الحديثة لتقديم خدمات لا مثيل لها. هدفنا هو تحقيق رضا عملائنا الكامل من خلال توفير حلول نقل مخصصة تتسم بالدقة والاحترافية.
+                        </p>
+                        <a href="#" class="bg-[#0097a7] hover:bg-[#007f8a] text-white font-bold py-3 px-6 transition-colors rounded-md">
+                            تعرف على المزيد
+                        </a>
+                    </div>
+                    <div class="h-64 md:h-full">
+                         <img src="https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/138672092_232568808404508_4859637229146124205_n.jpg" alt="فريق العمل" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 📊 Stats Panel -->
+        <section class="bg-[#0a1a2f] text-white py-16">
+            <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <!-- Stat 1 -->
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                    <p class="text-4xl font-black">1,500+</p>
+                    <p class="text-gray-300">عميل سعيد</p>
+                </div>
+                <!-- Stat 2 -->
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3"><path d="M3 9H21L19 17H5L3 9Z"></path><path d="M3 9L2.5 5.5C2.5 5.22386 2.72386 5 3 5H21C21.2761 5 21.5 5.22386 21.5 5.5L21 9"></path><path d="M12 13V21"></path><path d="M8 21H16"></path></svg>
+                    <p class="text-4xl font-black">5,000+</p>
+                    <p class="text-gray-300">عملية نقل ناجحة</p>
+                </div>
+                <!-- Stat 3 -->
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+                    <p class="text-4xl font-black">200+</p>
+                    <p class="text-gray-300">شاحنة مجهزة</p>
+                </div>
+                <!-- Stat 4 -->
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3"><path d="M20.2 7.8l-7.4 7.4-3.4-3.4-6.4 6.4"></path><path d="M14.8 7.8H21V14.2"></path></svg>
+                    <p class="text-4xl font-black">10+</p>
+                    <p class="text-gray-300">سنوات من الخبرة</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 📸 Gallery / Services Cards -->
+        <section id="gallery" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-black text-black">خدماتنا المميزة</h2>
+                    <p class="text-[#777777] mt-2">نظرة على بعض الخدمات التي نقدمها باحترافية</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="gallery-card group relative overflow-hidden shadow-lg rounded-lg">
+                        <img src="https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/159209789_515130716556564_4201828584582628063_n.jpg" alt="نقل سكني" class="w-full h-full object-cover transition-transform duration-300 ease-in-out">
+                        <div class="overlay absolute inset-0 bg-black/50 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">النقل السكني</h3>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-[#0097a7] text-white text-sm font-bold py-1 px-3 rounded-md">
+                            نقل منازل
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="gallery-card group relative overflow-hidden shadow-lg rounded-lg">
+                        <img src="https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/159215463_380355319737588_4858522255736302068_n.jpg" alt="نقل مكتبي" class="w-full h-full object-cover transition-transform duration-300 ease-in-out">
+                        <div class="overlay absolute inset-0 bg-black/50 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">النقل المكتبي</h3>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-[#0097a7] text-white text-sm font-bold py-1 px-3 rounded-md">
+                            نقل شركات
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="gallery-card group relative overflow-hidden shadow-lg rounded-lg">
+                        <img src="https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/164345221_3939913116067105_5100557662519613549_n.jpg" alt="تخزين" class="w-full h-full object-cover transition-transform duration-300 ease-in-out">
+                         <div class="overlay absolute inset-0 bg-black/50 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">التخزين الآمن</h3>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-[#0097a7] text-white text-sm font-bold py-1 px-3 rounded-md">
+                            مستودعات
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ▶️ Video Section -->
+        <section class="py-24 pattern-background">
+            <div class="container mx-auto px-6 text-center">
+                <button class="bg-[#0097a7] hover:bg-[#007f8a] text-white rounded-full w-24 h-24 flex items-center justify-center mx-auto transition-transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- 📦 Services List / Blog Teasers -->
+        <section id="services" class="py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-black text-black">حلول متكاملة لراحتكم</h2>
+                    <p class="text-[#777777] mt-2">استكشف مجموعتنا الكاملة من الخدمات المصممة لتلبية احتياجاتك</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/152422495_128736379148580_595104612872301893_n.jpg" class="w-full h-48 object-cover" alt="تغليف احترافي">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-bold text-xl mb-2">تغليف احترافي</h3>
+                            <p class="text-[#777777] flex-grow">نقدم خدمة تغليف شاملة باستخدام مواد عالية الجودة لحماية كل قطعة.</p>
+                            <a href="#" class="mt-4 self-start bg-[#0097a7] text-white font-semibold py-2 px-4 rounded-full hover:bg-[#007f8a] transition-colors">
+                                اقرأ المزيد
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/136088122_1698350403703369_7653464861533981361_n.jpg" class="w-full h-48 object-cover" alt="فك وتركيب">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-bold text-xl mb-2">فك وتركيب الأثاث</h3>
+                            <p class="text-[#777777] flex-grow">فريق متخصص لفك وتركيب جميع أنواع الأثاث بدقة وسرعة.</p>
+                            <a href="#" class="mt-4 self-start bg-[#0097a7] text-white font-semibold py-2 px-4 rounded-full hover:bg-[#007f8a] transition-colors">
+                                اقرأ المزيد
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/154267369_3264867296946271_2604782674254890978_n.jpg" class="w-full h-48 object-cover" alt="نقل دولي">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-bold text-xl mb-2">شحن دولي</h3>
+                            <p class="text-[#777777] flex-grow">خدمات شحن دولي موثوقة وآمنة لجميع أنحاء العالم.</p>
+                            <a href="#" class="mt-4 self-start bg-[#0097a7] text-white font-semibold py-2 px-4 rounded-full hover:bg-[#007f8a] transition-colors">
+                                اقرأ المزيد
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🧾 Placeholder List Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-black text-black">المقالات الأخيرة</h2>
+                    <p class="text-[#777777] mt-2">نصائح وإرشادات حول عمليات النقل والتخزين</p>
+                </div>
+                <div class="space-y-4 animate-pulse">
+                    <div class="border border-gray-200 p-4 rounded-md flex items-center space-x-4 space-x-reverse">
+                        <div class="bg-gray-200 h-16 w-16 rounded"></div>
+                        <div class="flex-1 space-y-2">
+                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 p-4 rounded-md flex items-center space-x-4 space-x-reverse">
+                        <div class="bg-gray-200 h-16 w-16 rounded"></div>
+                        <div class="flex-1 space-y-2">
+                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 p-4 rounded-md flex items-center space-x-4 space-x-reverse">
+                        <div class="bg-gray-200 h-16 w-16 rounded"></div>
+                        <div class="flex-1 space-y-2">
+                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                            <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 🌍 Map + CTA Section -->
+        <section id="contact" class="bg-gray-100">
+            <div class="container mx-auto grid md:grid-cols-2">
+                <div class="p-8 md:p-12 flex flex-col justify-center">
+                    <h2 class="text-3xl font-black text-black mb-4">هل أنت مستعد للنقل؟</h2>
+                    <p class="text-[#777777] mb-6">تواصل معنا اليوم للحصول على استشارة مجانية وعرض سعر مخصص لاحتياجاتك. فريقنا جاهز لمساعدتك.</p>
+                    <a href="tel:+01013143006" class="bg-[#f59e0b] hover:bg-orange-500 text-white font-bold py-3 px-8 self-start transition-colors rounded-md">
+                        اتصل بنا الآن
+                    </a>
+                </div>
+                <div class="h-80 md:h-full bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/46522781_2008751039183332_7751838850229469184_n.jpg');">
+                    <!-- In a real project, this would be an interactive map iframe -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 🔚 Footer -->
+    <footer class="bg-[#0a1a2f] text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="border-b border-gray-700 pb-8 mb-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Services -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">خدماتنا</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-[#0097a7]">نقل سكني</a></li>
+                        <li><a href="#" class="hover:text-[#0097a7]">نقل مكتبي</a></li>
+                        <li><a href="#" class="hover:text-[#0097a7]">تخزين وتغليف</a></li>
+                        <li><a href="#" class="hover:text-[#0097a7]">شحن دولي</a></li>
+                    </ul>
+                </div>
+                <!-- Company -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">الشركة</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#about" class="hover:text-[#0097a7]">من نحن</a></li>
+                        <li><a href="#" class="hover:text-[#0097a7]">وظائف</a></li>
+                        <li><a href="#" class="hover:text-[#0097a7]">المدونة</a></li>
+                        <li><a href="#" class="hover:text-[#0097a7]">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">تواصل معنا</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><p>القاهرة, مصر</p></li>
+                        <li><a href="mailto:info@example.com" class="hover:text-[#0097a7]">info@example.com</a></li>
+                        <li><a href="tel:+01013143006" class="hover:text-[#0097a7]">+01013143006</a></li>
+                    </ul>
+                </div>
+                <!-- Social -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">تابعنا</h4>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="text-gray-300 hover:text-[#0097a7]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#0097a7]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616v.064c0 2.299 1.634 4.217 3.793 4.65-1.002.274-2.12.21-2.968.052.658 1.874 2.56 3.229 4.832 3.262-1.616 1.267-3.636 2.02-5.833 2.02-.378 0-.75-.022-1.116-.065 2.08 1.342 4.556 2.122 7.23 2.122 8.683 0 13.44-7.217 13.44-13.44 0-.204-.005-.407-.013-.61a9.618 9.618 0 002.35-2.44z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#0097a7]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-gray-400 text-sm pt-8">
+                <p>&copy; <span id="year"></span> شركة النقل والخدمات اللوجستية. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // --- Footer Year Logic ---
+            const yearEl = document.getElementById('year');
+            if (yearEl) {
+                yearEl.textContent = new Date().getFullYear();
+            }
+            
+            // --- Sticky Header Logic ---
+            const header = document.getElementById('main-header');
+            if (header) {
+                // Set initial state based on scroll position
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-[#0a1a2f]', 'shadow-md');
+                    header.classList.remove('bg-transparent');
+                } else {
+                    header.classList.remove('bg-[#0a1a2f]', 'shadow-md');
+                    header.classList.add('bg-transparent');
+                }
+
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('bg-[#0a1a2f]', 'shadow-md');
+                        header.classList.remove('bg-transparent');
+                    } else {
+                        header.classList.remove('bg-[#0a1a2f]', 'shadow-md');
+                        header.classList.add('bg-transparent');
+                    }
+                });
+            }
+
+            // --- Smooth Scrolling Logic ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return; 
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Adjust for sticky header height
+                        const headerOffset = document.getElementById('main-header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+
+            // --- Hero Carousel Logic ---
+            const heroCarousel = document.getElementById('hero-carousel');
+            if (heroCarousel) {
+                const slider = heroCarousel.querySelector('.hero-slider');
+                const slides = heroCarousel.querySelectorAll('.hero-slide');
+                const prevButton = heroCarousel.querySelector('.hero-carousel-button.prev');
+                const nextButton = heroCarousel.querySelector('.hero-carousel-button.next');
+                const paginationContainer = heroCarousel.querySelector('.hero-carousel-pagination');
+
+                let currentSlide = 0;
+                let autoplayInterval = null;
+                const slideCount = slides.length;
+
+                // Create pagination dots
+                for (let i = 0; i < slideCount; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('hero-pagination-dot');
+                    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                    dot.addEventListener('click', () => {
+                        goToSlide(i);
+                        resetAutoplay();
+                    });
+                    paginationContainer.appendChild(dot);
+                }
+
+                const dots = paginationContainer.querySelectorAll('.hero-pagination-dot');
+
+                const goToSlide = (slideIndex) => {
+                    if (slideIndex >= slideCount) slideIndex = 0;
+                    else if (slideIndex < 0) slideIndex = slideCount - 1;
+
+                    slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    currentSlide = slideIndex;
+
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentSlide);
+                    });
+                };
+
+                const nextSlide = () => goToSlide(currentSlide + 1);
+                const prevSlide = () => goToSlide(currentSlide - 1);
+
+                const startAutoplay = () => {
+                    stopAutoplay();
+                    autoplayInterval = setInterval(nextSlide, 5000);
+                };
+
+                const stopAutoplay = () => clearInterval(autoplayInterval);
+                const resetAutoplay = () => {
+                    stopAutoplay();
+                    startAutoplay();
+                };
+
+                nextButton.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+                prevButton.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+                heroCarousel.addEventListener('mouseenter', stopAutoplay);
+                heroCarousel.addEventListener('mouseleave', startAutoplay);
+                
+                document.addEventListener('keydown', (e) => {
+                    if(document.activeElement === heroCarousel || heroCarousel.contains(document.activeElement)) {
+                        if (e.key === 'ArrowRight') { nextSlide(); resetAutoplay(); } 
+                        else if (e.key === 'ArrowLeft') { prevSlide(); resetAutoplay(); }
+                    }
+                });
+                
+                heroCarousel.setAttribute('tabindex', '0'); // Make it focusable
+                goToSlide(0);
+                startAutoplay();
+            }
+        });
+    </script>
+</body>
+</html>
