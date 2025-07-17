@@ -40,73 +40,80 @@
             opacity: 1;
         }
 
-        /* --- Hero Carousel Styles --- */
-        .hero-carousel {
+        /* --- Hero Video Styles --- */
+        .hero-video-container {
             position: relative;
             width: 100%;
-            height: 70vh; /* Adjust height as needed */
+            height: 80vh; /* Adjust height for a taller hero section */
             overflow: hidden;
         }
-        .hero-slider {
-            display: flex;
-            height: 100%;
-            transition: transform 0.7s ease-in-out;
-        }
-        .hero-slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-            box-sizing: border-box;
-            background-size: cover;
-            background-position: center;
-        }
-        .hero-carousel-button {
+        .hero-video-container iframe {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.4);
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; /* Allows clicking through the video to elements behind it */
+        }
+        /* This ensures the video covers the container, aspect ratio might be cropped */
+         @media (min-aspect-ratio: 16/9) {
+          .hero-video-container iframe {
+            /* Taller than the container */
+            height: 56.25vw;
+          }
+        }
+        @media (max-aspect-ratio: 16/9) {
+          .hero-video-container iframe {
+            /* Wider than the container */
+            width: 177.78vh;
+          }
+        }
+        
+        /* --- Discount Shape Styles --- */
+        .discount-shape {
+            position: absolute;
+            bottom: 2rem; /* Changed from top */
+            right: 2rem;  /* Changed from left */
+            width: 120px;   /* Made smaller */
+            height: 120px;  /* Made smaller */
+            background-color: #f59e0b;
             color: white;
-            border: none;
-            padding: 0.75rem;
-            cursor: pointer;
-            z-index: 10;
-            border-radius: 50%;
-            width: 3rem;
-            height: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.3s ease;
+            text-align: center;
+            font-weight: 900;
+            font-size: 1.5rem; /* Made smaller */
+            line-height: 1.2;
+            border-radius: 50%; /* This makes the shape a circle */
+            animation: pulse 2s infinite;
+            z-index: 15;
         }
-        .hero-carousel-button:hover {
-            background-color: rgba(0, 0, 0, 0.7);
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
-        .hero-carousel-button.prev {
-            left: 1.5rem;
-        }
-        .hero-carousel-button.next {
-            right: 1.5rem;
-        }
-        .hero-carousel-pagination {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.75rem;
-            z-index: 10;
-        }
-        .hero-pagination-dot {
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .hero-pagination-dot.active {
-            background-color: white;
-            transform: scale(1.2);
+        
+        @media (max-width: 768px) {
+            .discount-shape {
+                width: 65px;   /* Made smaller */
+                height: 65px;  /* Made smaller */
+                font-size: 1.2rem; /* Made smaller */
+                bottom: 1rem;    /* Changed from top */
+                right: 1rem;     /* Changed from left */
+            }
+            .hero-video-container {
+                height: 60vh;
+            }
         }
     </style>
 </head>
@@ -117,7 +124,7 @@
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <!-- Logo -->
             <a href="#" class="text-2xl font-bold">
-                شعار الشركة
+                العميد إكسبريس لنقل العفش
             </a>
             <!-- Navigation Menu -->
             <nav class="hidden md:flex items-center space-x-8 space-x-reverse">
@@ -143,55 +150,23 @@
     </header>
 
     <main>
-        <!-- 🚚 Hero Carousel Section -->
-        <section id="hero-carousel" class="hero-carousel">
-            <div class="hero-slider">
-                <!-- Slide 1 -->
-                <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/158898707_3399457056824771_4472752526008109004_o.jpg');">
-                    <div class="absolute inset-0 bg-black/50"></div>
-                    <div class="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
-                        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">نقل آمن، سريع، وموثوق</h1>
-                        <p class="text-lg md:text-xl mb-8 max-w-2xl">نقدم حلول نقل متكاملة تلبي جميع احتياجاتكم بكفاءة واحترافية.</p>
-                        <a href="#contact" class="bg-[#0097a7] hover:bg-[#007f8a] text-white font-bold py-3 px-8 transition-colors">اطلب عرض سعر الآن</a>
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="hero-slide" style="background-image: url('images/carousel-3.jpg');">
-                    <div class="absolute inset-0 bg-black/50"></div>
-                     <div class="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
-                        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">تغليف احترافي لكل قطعة</h1>
-                        <p class="text-lg md:text-xl mb-8 max-w-2xl">نضمن سلامة ممتلكاتك باستخدام أفضل مواد التغليف.</p>
-                        <a href="#services" class="bg-[#f59e0b] hover:bg-orange-500 text-white font-bold py-3 px-8 transition-colors">اكتشف خدماتنا</a>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/96082384_676635066214761_4640366723403350016_n.jpg');">
-                    <div class="absolute inset-0 bg-black/50"></div>
-                    <div class="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
-                        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">أسطول شاحنات حديث</h1>
-                        <p class="text-lg md:text-xl mb-8 max-w-2xl">شاحنات مجهزة لجميع أنواع النقل، لضمان وصولها بأمان.</p>
-                        <a href="#gallery" class="bg-[#0097a7] hover:bg-[#007f8a] text-white font-bold py-3 px-8 transition-colors">شاهد أعمالنا</a>
-                    </div>
-                </div>
-                 <!-- Slide 4 -->
-                <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/code-house10/01013143006/refs/heads/main/images/18813256_1792032541106815_512617771018849509_n.jpg');">
-                    <div class="absolute inset-0 bg-black/50"></div>
-                    <div class="relative h-full flex flex-col justify-center items-center text-center text-white px-4">
-                        <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">خبرة تمتد لسنوات</h1>
-                        <p class="text-lg md:text-xl mb-8 max-w-2xl">فريقنا المحترف جاهز لخدمتكم في أي وقت.</p>
-                        <a href="#about" class="bg-[#f59e0b] hover:bg-orange-500 text-white font-bold py-3 px-8 transition-colors">اعرف المزيد عنا</a>
-                    </div>
-                </div>
+        <!-- 🚚 Hero Video Section -->
+        <section class="hero-video-container">
+            <div class="discount-shape">
+                خصم 25%
             </div>
-            
-            <button aria-label="الشريحة السابقة" class="hero-carousel-button prev">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" transform="rotate(180 12 12)" /></svg>
-            </button>
-            <button aria-label="الشريحة التالية" class="hero-carousel-button next">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            </button>
-            
-            <div class="hero-carousel-pagination"></div>
+            <iframe 
+                src="https://www.youtube.com/embed/6KdkL5dCleM?autoplay=1&mute=1&loop=1&playlist=6KdkL5dCleM&controls=0&showinfo=0&autohide=1&modestbranding=1" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+            </iframe>
+            <div class="absolute inset-0 bg-black/10"></div>
+            <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 z-10">
+                <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight"></h1>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl"></p><br><br><br><br><br><br><br><br><br><br><br>
+                <a href="#contact" class="bg-[#0097a7] hover:bg-[#007f8a] text-white font-bold py-3 px-8 transition-colors rounded-md shadow-lg">اطلب عرض سعر الآن</a>
+            </div>
         </section>
 
         <!-- 🧩 Features Section -->
@@ -564,16 +539,20 @@
                 const slideCount = slides.length;
 
                 // Create pagination dots
-                for (let i = 0; i < slideCount; i++) {
-                    const dot = document.createElement('button');
-                    dot.classList.add('hero-pagination-dot');
-                    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-                    dot.addEventListener('click', () => {
-                        goToSlide(i);
-                        resetAutoplay();
-                    });
-                    paginationContainer.appendChild(dot);
+                if(paginationContainer){
+                    paginationContainer.innerHTML = ''; // Clear existing dots
+                    for (let i = 0; i < slideCount; i++) {
+                        const dot = document.createElement('button');
+                        dot.classList.add('hero-pagination-dot');
+                        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                        dot.addEventListener('click', () => {
+                            goToSlide(i);
+                            resetAutoplay();
+                        });
+                        paginationContainer.appendChild(dot);
+                    }
                 }
+
 
                 const dots = paginationContainer.querySelectorAll('.hero-pagination-dot');
 
